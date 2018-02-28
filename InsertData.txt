@@ -1,0 +1,44 @@
+//PHP script that insert data into the database
+<?php
+
+	// Attempt MySQL server connection. Assuming you are running MySQL server 
+	// with default setting (user 'root', with no password)
+	// mysqli_connect opens a connection to the database
+	// This method requires four parameters: server, username, password, database name
+	// since we work out of MAMP MySQL server, server is called localhost
+	// username and password are simply set to the root user
+	// the database is called "demo"
+	// opens connections, stored in a variable called link
+	$link = mysqli_connect("localhost", "root", "root", "demo");
+
+
+	// Check connection
+	if($link === false){ 
+	
+
+	// if the connection is false, we return ERROR message
+    	die("ERROR: Could not connect. " . mysqli_connect_error());
+	}
+	
+
+	// Attempt INSERT query execution, stored that in a variable called sql
+	$sql = "INSERT INTO persons (first_name, last_name, email_address) VALUES ('Sijia', 'Liang', 'sl66617n@pace.edu')";//the SQL to insert a new record
+	
+	
+	// If statement that tell us whether or not the query execution was successful
+	// we call the query method as mysqli_query($Link, $sql) 
+	// with query stored in the $sql value in the database connection
+	if(mysqli_query($link, $sql)){
+
+	// if that's there, the query was executed successfully, we report "Records added successfully."
+ 	   echo "Records added successfully.";
+
+	// If it was not created, we output our error
+	} else{
+ 	   echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+	}
+
+	// Close connection
+	mysqli_close($link);
+
+?>
